@@ -44,6 +44,20 @@ class ReviewsService {
 
     return mapDBToReviews(result.rows[0]);
   }
+
+  async deleteReviewById(id) {
+    const query = {
+      text: 'DELETE FROM reviews WHERE id = $1 RETURNING id',
+      values: [id],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Review Gagal dihapus, Id tidak ditemukan');
+
+    }
+  }
 }
 
 module.exports = ReviewsService;
