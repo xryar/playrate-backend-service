@@ -1,0 +1,42 @@
+const routes = (handler) => [
+  {
+    method: 'POST',
+    path: '/reviews',
+    handler: handler.postReviewHandler,
+    options: {
+      auth: 'playrate_jwt',
+      payload: {
+        allow: 'multipart/form-data',
+        multipart: true,
+        output: 'stream',
+        maxBytes: 512000,
+      }
+    }
+  },
+  {
+    method: 'GET',
+    path: '/reviews',
+    handler: handler.getReviewsHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'GET',
+    path: '/reviews/{id}',
+    handler: handler.getReviewByIdHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'DELETE',
+    path: '/reviews/{id}',
+    handler: handler.deleteReviewByIdHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  }
+];
+
+module.exports = routes;
