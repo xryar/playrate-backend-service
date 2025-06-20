@@ -1,6 +1,8 @@
 const { nanoid } = require('nanoid');
 const { Pool } = require('pg');
 const InvariantError = require('../../exceptions/InvariantError');
+const NotFoundError = require('../../exceptions/NotFoundError');
+const mapDBToReviews = require('../../utils/index');
 
 class ReviewsService {
   constructor() {
@@ -22,6 +24,25 @@ class ReviewsService {
     }
 
     return result.rows[0].id;
+  }
+
+  async getAllReviews() {
+    const result = await this._pool.query('SELECT * FROM reviews');
+    return result.rows.map(mapDBToReviews);
+  }
+
+  async getReviewById(id) {
+    const query = {
+      text: 'SELECT * FROM reviews WHERE id = $1',
+      values: [id],
+    };
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Id tidak ditemukan');
+    }
+
+    return mapDBToReviews(result.rows[0]);
   }
 }
 
