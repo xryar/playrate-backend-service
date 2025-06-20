@@ -68,6 +68,8 @@ const init = async () => {
       newResponse.code(500);
       return newResponse;
     }
+
+    return h.continue;
   });
 
   await server.start();
