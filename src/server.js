@@ -4,6 +4,7 @@ const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
 
 const ClientError = require('./exceptions/ClientError');
+const plugins = require('./plugins/plugins');
 const config = require('./utils/config');
 
 const init = async () => {
@@ -39,7 +40,7 @@ const init = async () => {
     }),
   });
 
-  //   await server.register(plugins)
+  await server.register(plugins);
 
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
