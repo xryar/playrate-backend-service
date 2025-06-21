@@ -31,6 +31,71 @@ class ReviewsHandler {
     response.code(201);
     return response;
   }
+
+  async getReviewsHandler(request, h) {
+    const reviews = await this._reviewsService.getAllReviews();
+    const response = h.response({
+      status: 'success',
+      message: 'Berhasil mengambil Review',
+      data: {
+        reviews
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  async getReviewByIdHandler(request, h) {
+    const id = request.params;
+    const review = await this._reviewsService.getReviewById(id);
+    const response = h.response({
+      status: 'success',
+      message: 'Berhasil mengambil Review',
+      data: {
+        review
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  async getMyReviews(request, h) {
+    const { id: credentialId } = request.auth.credentials;
+    const reviews = await this._reviewsService.getReviewByUserId(credentialId);
+    const response = h.response({
+      status: 'success',
+      message: 'Berhasil mengambil Review',
+      data: {
+        reviews
+      }
+    });
+    response.code(200);
+    return response;
+  }
+
+  async getReviewByUserId(request, h) {
+    const { userId } = request.params;
+    const reviews = await this._reviewsService.getReviewByUserId(userId);
+    const response = h.response({
+      status: 'success',
+      message: 'Berhasil mengambil Review',
+      data: {
+        reviews
+      }
+    });
+    response.code(200);
+    return response;
+  }
+
+  async deleteReviewById(request, h) {
+    const id = request.params;
+    await this._reviewsService.deleteReviewById(id);
+
+    h.response({
+      status: 'success',
+      message: 'Review Berhasil dihapus'
+    });
+  }
 }
 
 module.exports = ReviewsHandler;

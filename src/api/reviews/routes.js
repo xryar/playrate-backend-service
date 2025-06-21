@@ -15,30 +15,46 @@ const routes = (handler) => [
       }
     }
   },
-  // {
-  //   method: 'GET',
-  //   path: '/reviews',
-  //   handler: handler.getReviewsHandler,
-  //   options: {
-  //     auth: 'playrate_jwt',
-  //   }
-  // },
-  // {
-  //   method: 'GET',
-  //   path: '/reviews/{id}',
-  //   handler: handler.getReviewByIdHandler,
-  //   options: {
-  //     auth: 'playrate_jwt',
-  //   }
-  // },
-  // {
-  //   method: 'DELETE',
-  //   path: '/reviews/{id}',
-  //   handler: handler.deleteReviewByIdHandler,
-  //   options: {
-  //     auth: 'playrate_jwt',
-  //   }
-  // },
+  {
+    method: 'GET',
+    path: '/reviews',
+    handler: handler.getReviewsHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'GET',
+    path: '/reviews/{id}',
+    handler: handler.getReviewByIdHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'GET',
+    path: '/reviews/my-reviews',
+    handler: handler.getMyReviews,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'GET',
+    path: '/users/{userId}/reviews',
+    handler: handler.getReviewByUserIdHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'DELETE',
+    path: '/reviews/{id}',
+    handler: handler.deleteReviewByIdHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
   {
     method: 'GET',
     path: '/reviews/{param*}',

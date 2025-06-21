@@ -45,6 +45,20 @@ class ReviewsService {
     return mapDBToReviews(result.rows[0]);
   }
 
+  async getReviewByUserId(userId) {
+    const query = {
+      text: 'SELECT * FROM reviews WHERE user_id = $1',
+      values: [userId],
+    };
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Id tidak ditemukan');
+    }
+
+    return result.rows.map(mapDBToReviews);
+  }
+
   async deleteReviewById(id) {
     const query = {
       text: 'DELETE FROM reviews WHERE id = $1 RETURNING id',
