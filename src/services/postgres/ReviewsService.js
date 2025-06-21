@@ -13,7 +13,7 @@ class ReviewsService {
     const id = `review-${nanoid(16)}`;
 
     const query = {
-      text: 'INSERT INTO reviews (id, user_id, title, description, cover_url) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      text: 'INSERT INTO reviews (id, user_id, title, description, cover_url) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       values: [id, userId, title, description, coverUrl],
     };
 
@@ -23,7 +23,7 @@ class ReviewsService {
       throw new InvariantError('Review gagal ditambahkan');
     }
 
-    return result.rows[0].id;
+    return result.rows[0];
   }
 
   async getAllReviews() {

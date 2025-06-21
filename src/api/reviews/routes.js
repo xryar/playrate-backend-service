@@ -15,36 +15,36 @@ const routes = (handler) => [
       }
     }
   },
-  {
-    method: 'GET',
-    path: '/reviews',
-    handler: handler.getReviewsHandler,
-    options: {
-      auth: 'playrate_jwt',
-    }
-  },
-  {
-    method: 'GET',
-    path: '/reviews/{id}',
-    handler: handler.getReviewByIdHandler,
-    options: {
-      auth: 'playrate_jwt',
-    }
-  },
-  {
-    method: 'DELETE',
-    path: '/reviews/{id}',
-    handler: handler.deleteReviewByIdHandler,
-    options: {
-      auth: 'playrate_jwt',
-    }
-  },
+  // {
+  //   method: 'GET',
+  //   path: '/reviews',
+  //   handler: handler.getReviewsHandler,
+  //   options: {
+  //     auth: 'playrate_jwt',
+  //   }
+  // },
+  // {
+  //   method: 'GET',
+  //   path: '/reviews/{id}',
+  //   handler: handler.getReviewByIdHandler,
+  //   options: {
+  //     auth: 'playrate_jwt',
+  //   }
+  // },
+  // {
+  //   method: 'DELETE',
+  //   path: '/reviews/{id}',
+  //   handler: handler.deleteReviewByIdHandler,
+  //   options: {
+  //     auth: 'playrate_jwt',
+  //   }
+  // },
   {
     method: 'GET',
     path: '/reviews/{param*}',
     handler: {
       directory: {
-        path: path.resolve(__dirname, 'file')
+        path: path.resolve(__dirname, 'file'),
       }
     }
   }
