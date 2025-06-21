@@ -23,7 +23,7 @@ class ReviewsService {
       throw new InvariantError('Review gagal ditambahkan');
     }
 
-    return result.rows[0];
+    return mapDBToReviews(result.rows[0]);
   }
 
   async getAllReviews() {
