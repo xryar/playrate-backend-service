@@ -46,7 +46,7 @@ class ReviewsHandler {
   }
 
   async getReviewByIdHandler(request, h) {
-    const id = request.params;
+    const { id } = request.params;
     const review = await this._reviewsService.getReviewById(id);
     const response = h.response({
       status: 'success',
@@ -73,7 +73,7 @@ class ReviewsHandler {
     return response;
   }
 
-  async getReviewByUserId(request, h) {
+  async getReviewByUserIdHandler(request, h) {
     const { userId } = request.params;
     const reviews = await this._reviewsService.getReviewByUserId(userId);
     const response = h.response({
@@ -87,11 +87,11 @@ class ReviewsHandler {
     return response;
   }
 
-  async deleteReviewById(request, h) {
-    const id = request.params;
+  async deleteReviewByIdHandler(request, h) {
+    const { id } = request.params;
     await this._reviewsService.deleteReviewById(id);
 
-    h.response({
+    return h.response({
       status: 'success',
       message: 'Review Berhasil dihapus'
     });

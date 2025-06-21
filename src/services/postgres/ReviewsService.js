@@ -2,7 +2,7 @@ const { nanoid } = require('nanoid');
 const { Pool } = require('pg');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
-const mapDBToReviews = require('../../utils/index');
+const { mapDBToReviews } = require('../../utils/index');
 
 class ReviewsService {
   constructor() {
