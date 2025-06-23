@@ -38,7 +38,10 @@ class ReviewsService {
 
   async getReviewById(id) {
     const query = {
-      text: 'SELECT * FROM reviews WHERE id = $1',
+      text: `SELECT reviews.*, users.username
+      FROM reviews
+      JOIN users ON reviews.user_id = users.id
+      WHERE reviews.id = $1`,
       values: [id],
     };
     const result = await this._pool.query(query);
@@ -52,7 +55,10 @@ class ReviewsService {
 
   async getReviewByUserId(userId) {
     const query = {
-      text: 'SELECT * FROM reviews WHERE user_id = $1',
+      text: `SELECT reviews.*, users.username
+      FROM reviews
+      JOIN users ON reviews.user_id = users.id
+      WHERE reviews.user_id = $1`,
       values: [userId],
     };
     const result = await this._pool.query(query);
