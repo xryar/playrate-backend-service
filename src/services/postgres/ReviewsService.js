@@ -27,7 +27,12 @@ class ReviewsService {
   }
 
   async getAllReviews() {
-    const result = await this._pool.query('SELECT * FROM reviews');
+    const query = {
+      text: `SELECT reviews.*, users.username
+      FROM reviews
+      JOIN users ON reviews.user_id = users.id`
+    };
+    const result = await this._pool.query(query);
     return result.rows.map(mapDBToReviews);
   }
 
