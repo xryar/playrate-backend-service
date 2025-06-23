@@ -62,6 +62,12 @@ const routes = (handler) => [
       directory: {
         path: path.resolve(__dirname, 'file'),
       }
+    },
+    options: {
+      auth: false,
+      cors: {
+        origin: ['*'],
+      }
     }
   }
 ];
