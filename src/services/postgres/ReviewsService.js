@@ -30,7 +30,8 @@ class ReviewsService {
     const query = {
       text: `SELECT reviews.*, users.username
       FROM reviews
-      JOIN users ON reviews.user_id = users.id`
+      JOIN users ON reviews.user_id = users.id
+      ORDER BY reviews.created_at DESC`
     };
     const result = await this._pool.query(query);
     return result.rows.map(mapDBToReviews);
@@ -41,7 +42,8 @@ class ReviewsService {
       text: `SELECT reviews.*, users.username
       FROM reviews
       JOIN users ON reviews.user_id = users.id
-      WHERE reviews.id = $1`,
+      WHERE reviews.id = $1
+      ORDER BY reviews.created_at DESC`,
       values: [id],
     };
     const result = await this._pool.query(query);
@@ -58,7 +60,8 @@ class ReviewsService {
       text: `SELECT reviews.*, users.username
       FROM reviews
       JOIN users ON reviews.user_id = users.id
-      WHERE reviews.user_id = $1`,
+      WHERE reviews.user_id = $1
+      ORDER BY reviews.created_at DESC`,
       values: [userId],
     };
     const result = await this._pool.query(query);
