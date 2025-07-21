@@ -13,13 +13,13 @@ class ReviewsHandler {
   async postReviewHandler(request, h) {
     this._validator.validateReviewPayload(request.payload);
     const { id: credentialId } = request.auth.credentials;
-    const { title, description, cover } = request.payload;
+    const { title, description, cover, rating } = request.payload;
     this._validator.validateImageHeaders(cover.hapi.headers);
 
     const filename = await this._storageService.writeFile(cover, cover.hapi);
     const fileLocation = `http://${config.app.host}:${config.app.port}/reviews/images/${filename}`;
 
-    const newReview = await this._reviewsService.addReview(credentialId, { title, description, coverUrl: fileLocation });
+    const newReview = await this._reviewsService.addReview(credentialId, { title, description, coverUrl: fileLocation, rating });
 
     const response = h.response({
       status: 'success',

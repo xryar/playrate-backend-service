@@ -17,6 +17,11 @@ exports.up = (pgm) => {
       type: 'TEXT',
       notNull: true
     },
+    rating: {
+      type: 'NUMERIC(2,1)',
+      notNull: true,
+      check: 'rating >= 1.0 AND rating <= 5.0'
+    },
     cover_url: {
       type: 'TEXT',
       notNull: true,

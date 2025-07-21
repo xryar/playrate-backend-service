@@ -9,12 +9,12 @@ class ReviewsService {
     this._pool = new Pool();
   }
 
-  async addReview(userId, { title, description, coverUrl }) {
+  async addReview(userId, { title, description, coverUrl, rating }) {
     const id = `review-${nanoid(16)}`;
 
     const query = {
-      text: 'INSERT INTO reviews (id, user_id, title, description, cover_url) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      values: [id, userId, title, description, coverUrl],
+      text: 'INSERT INTO reviews (id, user_id, title, description, cover_url, rating) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      values: [id, userId, title, description, coverUrl, rating],
     };
 
     const result = await this._pool.query(query);
@@ -65,10 +65,6 @@ class ReviewsService {
       values: [userId],
     };
     const result = await this._pool.query(query);
-
-    if (!result.rows.length) {
-      throw new NotFoundError('Id tidak ditemukan');
-    }
 
     return result.rows.map(mapDBToReviews);
   }

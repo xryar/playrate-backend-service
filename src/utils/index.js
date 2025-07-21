@@ -5,7 +5,8 @@ const mapDBToReviews = ({
   title,
   description,
   cover_url,
-  created_at
+  created_at,
+  rating,
 }) => ({
   id: id,
   username: username,
@@ -13,6 +14,7 @@ const mapDBToReviews = ({
   description: description,
   coverUrl: cover_url,
   createdAt: created_at,
+  rating: rating,
 });
 
 module.exports = {
