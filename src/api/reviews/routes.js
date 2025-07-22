@@ -33,6 +33,14 @@ const routes = (handler) => [
   },
   {
     method: 'GET',
+    path: '/reviews/search',
+    handler: handler.searchReviewsHandler,
+    options: {
+      auth: 'playrate_jwt',
+    }
+  },
+  {
+    method: 'GET',
     path: '/reviews/my-reviews',
     handler: handler.getMyReviews,
     options: {

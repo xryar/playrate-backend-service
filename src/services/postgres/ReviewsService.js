@@ -37,6 +37,21 @@ class ReviewsService {
     return result.rows.map(mapDBToReviews);
   }
 
+  async searchReviews(keyword) {
+    const query = {
+      text: `SELECT reviews.*, users.username
+      FROM reviews
+      JOIN users ON reviews.user_id = users.id
+      WHERE LOWER(reviews.title) LIKE LOWER($1)
+      OR LOWER(reviews.description) LIKE LOWER($1)
+      ORDER BY reviews.created_at DESC`,
+      values: [`%${keyword}%`],
+    };
+
+    const result = await this._pool.query(query);
+    return result.rows.map(mapDBToReviews);
+  }
+
   async getReviewById(id) {
     const query = {
       text: `SELECT reviews.*, users.username

@@ -45,6 +45,29 @@ class ReviewsHandler {
     return response;
   }
 
+  async searchReviewsHandler(request, h) {
+    const { query } = request.query;
+
+    if (!query || query.trim() === '') {
+      return h.response({
+        status: 'fail',
+        message: 'Query pencarian tidak boleh kosong',
+      }).code(400);
+    }
+
+    const reviews = await this._reviewsService.searchReviews(query);
+
+    const response = h.response({
+      status: 'success',
+      message: 'Berhasil melakukan pencarian',
+      data: {
+        reviews,
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
   async getReviewByIdHandler(request, h) {
     const { id } = request.params;
     const review = await this._reviewsService.getReviewById(id);
