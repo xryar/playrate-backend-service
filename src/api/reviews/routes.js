@@ -48,14 +48,6 @@ const routes = (handler) => [
     }
   },
   {
-    method: 'GET',
-    path: '/users/{userId}/reviews',
-    handler: handler.getReviewByUserIdHandler,
-    options: {
-      auth: 'playrate_jwt',
-    }
-  },
-  {
     method: 'DELETE',
     path: '/reviews/{id}',
     handler: handler.deleteReviewByIdHandler,

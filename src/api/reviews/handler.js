@@ -96,20 +96,6 @@ class ReviewsHandler {
     return response;
   }
 
-  async getReviewByUserIdHandler(request, h) {
-    const { userId } = request.params;
-    const reviews = await this._reviewsService.getReviewByUserId(userId);
-    const response = h.response({
-      status: 'success',
-      message: 'Berhasil mengambil Review',
-      data: {
-        reviews
-      }
-    });
-    response.code(200);
-    return response;
-  }
-
   async deleteReviewByIdHandler(request, h) {
     const { id } = request.params;
     await this._reviewsService.deleteReviewById(id);
