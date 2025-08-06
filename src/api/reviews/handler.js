@@ -1,5 +1,4 @@
 const autoBind = require('auto-bind');
-const config = require('../../utils/config');
 
 class ReviewsHandler {
   constructor(reviewsService, storageService, validator) {
@@ -16,8 +15,8 @@ class ReviewsHandler {
     const { title, description, cover, rating } = request.payload;
     this._validator.validateImageHeaders(cover.hapi.headers);
 
-    const filename = await this._storageService.writeFile(cover, cover.hapi);
-    const fileLocation = `http://${config.app.host}:${config.app.port}/reviews/images/${filename}`;
+    const storagePath = await this._storageService.writeFile(cover, cover.hapi);
+    const fileLocation = this._storageService.getPublicUrl(storagePath);
 
     const newReview = await this._reviewsService.addReview(credentialId, { title, description, coverUrl: fileLocation, rating });
 
