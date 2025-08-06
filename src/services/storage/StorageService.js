@@ -2,7 +2,7 @@
 const supabase = require('../../utils/supabaseClient');
 
 class StorageService {
-  constructor(bucketName = 'playrate-images') {
+  constructor(bucketName = process.env.BUCKET_NAME) {
     this._bucket = bucketName;
   }
 

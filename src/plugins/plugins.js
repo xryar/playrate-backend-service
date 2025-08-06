@@ -13,7 +13,7 @@ const ReviewsValidator = require('../validator/reviews');
 const usersService = new UsersService();
 const authenticationsService = new AuthenticationsService();
 const reviewsService = new ReviewsService();
-const storageService = new StorageService('playrate-images');
+const storageService = new StorageService(process.env.BUCKET_NAME);
 
 module.exports = [
   {
